@@ -1,14 +1,15 @@
 import sys
 import getopt
-import datetime
+from datetime import datetime
 from pytrends.request import TrendReq
 import pandas as pd
 
 # params 
 # --frequency D,W,M,Y
-# --filename trend.csv (optional)
-# --startdate 2016-07-06 (optional)
-# --keyword football (optional)
+# --filename trend.csv 
+# --startDate 2016-07-06 
+# --endDate 2016-07-06 
+# --keyword football 
 
 def getParams():
     """Get parameters on startup
@@ -26,8 +27,8 @@ def getParams():
 if __name__ == "__main__":
     params = getParams()
     filename = "data.csv"
-    startDate = "2020-01-01".date()
-    endDate = datetime.datetime.now()
+    startDate = datetime.strptime("2020-01-01", '%Y-%m-%d')
+    endDate = datetime.now()
     keyword = "bitcoin"
     frequency = 'D'
 
@@ -35,7 +36,10 @@ if __name__ == "__main__":
         filename = params["--filename"]
     
     if "--startDate" in params:
-        startDate = params["--startDate"]
+        startDate = datetime.strptime(params["--startDate"], '%Y-%m-%d') 
+    
+    if "--endDate" in params:
+        endDate = datetime.strptime(params["--endDate"], '%Y-%m-%d') 
 
     if "--keyword" in params:
         keyword = params["--keyword"]
