@@ -1,32 +1,23 @@
-# Project Title
+# Google Trends Data Scraper
+Python script to collect Google Trends weekly, daily, monthly, and yearly data with for a keyword save results in a csv file.
 
-One Paragraph of the project description
-
-## Getting Started
-
-These instructions will give you a copy of the project up and running on
-your local machine for development and testing purposes. See deployment
-for notes on deploying the project on a live system.
-
-### Installing
-
-Python Packages needed to run:
-- pandas
-- pytrends
-
-Installing Packages
-
-    pip install pandas pytrends
-
-And repeat
-
-    until finished
-
-End with an example of getting some data out of the system or using it
-for a little demo
-
-## Running Script
-
-Explain how to run the automated tests for this system
-
+## Requirements
+Install packages required to run script
+```bash
+$ pip install -r requirements.txt
+```
+## Usage
+### Parameters
+* **frequency**: Frequency of data points (D,W,M,Y)
+* **keyword**: Keyword to used to collect trend data
+    * Default 'bitcoin'
+* **filename**: File location and name. Saved as CSV
+* **startDate**: First date of data inclusive
+    * Format '%Y-%m-%d'
+* **endDate**: Last date of data inclusive
+    * Format '%Y-%m-%d'
+### Sample
+```bash
+$ py .\DataScraper.py --frequency=D --keyword=bitcoin
+```
 

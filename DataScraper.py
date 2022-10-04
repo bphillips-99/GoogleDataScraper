@@ -6,19 +6,12 @@ from dateutil import rrule
 from pytrends.request import TrendReq
 import pandas as pd
 
-# params 
-# --frequency D,W,M,Y
-# --filename trend.csv 
-# --startDate 2016-07-06 
-# --endDate 2016-07-06 
-# --keyword football 
-
 def get_params():
     """Get parameters on startup
     :return: Dictionary of Params
     """
     try:
-        optlist,args = getopt.gnu_getopt(sys.argv,"",["startdate=","filename=","frequency=","keyword="])
+        optlist,args = getopt.gnu_getopt(sys.argv,"",["startDate=","filename=","frequency=","keyword=","endDate"])
     except getopt.GetoptError as err:
         print(err)
         exit(2)
@@ -76,6 +69,10 @@ if __name__ == "__main__":
 
     if "--frequency" in params:
         frequency = params["--frequency"]
+
+    #prevent frequencies less then day
+    if frequency not in ["D", "W", "M", "Y"]:
+        raise Exception(f'Invalid frequency: {frequency}')
 
     data = get_trends()
     data = clean_data(data, frequency)
