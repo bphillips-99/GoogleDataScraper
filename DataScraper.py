@@ -19,7 +19,10 @@ def get_params():
     #convert list of tuple to dictionary
     return dict((o, a) for o, a in optlist)
 
-def get_trends():
+def get_trends(startDate, endDate, keyword):
+    """Collect google trends keyword data
+    :return: Panda Dataframe of trend data
+    """
     # init Google Trends Request Object
     # tz 360 US CST Timezone offset
     pt = TrendReq(hl="en-US", tz=360)
@@ -40,7 +43,10 @@ def get_trends():
         data = pd.concat([yearData,data]) if data is not None else yearData
     return data
 
-def clean_data(data, frequency = 'D'):
+def clean_data(data, frequency):
+    """Clear date index and group by frequency
+    :return: Panda Dataframe of cleaned data
+    """
     # convert index column to number so date can be grouped
     data = data.reset_index()
     return data.groupby([pd.Grouper(key='date', freq=frequency)])[keyword].sum()
@@ -74,7 +80,7 @@ if __name__ == "__main__":
     if frequency not in ["D", "W", "M", "Y"]:
         raise Exception(f'Invalid frequency: {frequency}')
 
-    data = get_trends()
+    data = get_trends(startDate, endDate, keyword)
     data = clean_data(data, frequency)
     data.to_csv(filename)
     
