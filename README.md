@@ -18,6 +18,6 @@ $ pip install -r requirements.txt
     * Format '%Y-%m-%d'
 ### Sample
 ```bash
-$ py .\DataScraper.py --frequency=D --keyword=bitcoin
+$ py DataScraper.py --frequency=D --keyword=bitcoin
 ```
 
